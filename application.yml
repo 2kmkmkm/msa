@@ -1,0 +1,4 @@
+# 모든 마이크로서비스 공통 토큰 설정
+token:
+  expiration-time: 86400000
+  secret: my-very-long-secret-key-1234567890123456
