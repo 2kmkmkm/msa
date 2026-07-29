@@ -6,3 +6,59 @@ spring:
 token:
   expiration-time: 86400000
   secret: "{cipher}AYACgT10xIKHipeJ0jrTQowRas7wI1Y6A/lX88z023CQnvFYT/whUFWYIfUv0tVybIjvIJ1R+vDn+iT3fKJE/K6AgVG2xBY+zOnapN9k7J8wFZBNh7SXYjIRJXtnInqLI9/8gJRVveyiR+08sc2TeJ7OnjXEUJ28JELri95JFk2boPh7TEq4w7pxFQG91WByboGctfrMpDwIN41PmNwM9plnfXgAHnyR31R8mUvGwBL28RQ0wa+EXVg7FThp4DckW3eC4wYvAGo5COoDIp+efZKICZNcD2u2z4MRwmzTAxj/EOojpKLzgQ5sGcOIeASmtAGQPHhkGIRvbFdu36cuWKn7BsyoSO2KSbXDClAhE5FSxsRBSq/7YAgKqpIoE2Z0S25VFti7QuGewHJ0M6+rnE7YMLIhXfUSqKwUqlmGb+Wk5bpTEQy5o62GI5g3o6ApZKS0k0TqoSsT7JnLm7+KG02Rpv5vI/kcyJ4zNa4HhVJIrWn5Z2sRl8wO38urS7nUKJ/8QTZ6WmR0O9zQW4vWlxZIWkdnmLfOPGUolffddsmR8EGAXs9y3bMCCHxAjHAeHXTPaptreMBvtx4nJqdbE4Ut"
+
+server:
+  port: 8083
+
+spring:
+  application:
+    name: user-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+#  profiles:
+#    active: dev
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  security:
+    user:
+      name: user
+      password: $2a$10$g70rRcQBR7Jnm9A9m/Nqje8lCIPeADz2.VBMxhPyzUBoJc28pvC9.
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+greeting:
+  message: Welcome to the Simple E-commerce. (spring boot)
+
+#token:
+#  expiration-time: 86400000 #10 days
+#  secret: my-very-long-secret-key-1234567890123456
+
+order-service:
+  url: http://127.0.0.1:8000/order-service/%s/orders
